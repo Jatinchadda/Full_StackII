@@ -32,184 +32,149 @@ function FormApp() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#f5f5f5",
-        padding: "50px 20px",
+        background: "linear-gradient(135deg, #e3f2fd, #f5f5f5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         fontFamily: "Arial, sans-serif",
+        padding: "20px",
       }}
     >
       <div
         style={{
-          maxWidth: "600px",
-          margin: "0 auto",
           backgroundColor: "#ffffff",
-          padding: "30px",
-          borderRadius: "10px",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+          padding: "25px",
+          borderRadius: "12px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          width: "380px",
         }}
       >
-        <h1 style={{ textAlign: "center", marginBottom: "30px" }}>
-          Simple Form SPA
-        </h1>
+        {/* INNER BORDER */}
+        <div
+          style={{
+            border: "2px solid #90caf9",
+            borderRadius: "10px",
+            padding: "20px",
+          }}
+        >
+          <h2
+            style={{
+              textAlign: "center",
+              marginBottom: "8px",
+              color: "#1976d2",
+            }}
+          >
+            Contact Form
+          </h2>
+          <p
+            style={{
+              textAlign: "center",
+              marginBottom: "20px",
+              color: "#666",
+              fontSize: "0.9rem",
+            }}
+          >
+            Please fill in your details below
+          </p>
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "20px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "5px",
-                fontWeight: "bold",
-              }}
-            >
-              Name:
-            </label>
+          <form onSubmit={handleSubmit}>
+            {/* NAME */}
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
+              placeholder="Your Name"
               required
-              style={{
-                width: "100%",
-                padding: "10px",
-                fontSize: "1rem",
-                border: "2px solid #ddd",
-                borderRadius: "5px",
-                boxSizing: "border-box",
-              }}
+              style={inputStyle}
             />
-          </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "5px",
-                fontWeight: "bold",
-              }}
-            >
-              Email:
-            </label>
+            {/* EMAIL */}
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              placeholder="Your Email"
               required
-              style={{
-                width: "100%",
-                padding: "10px",
-                fontSize: "1rem",
-                border: "2px solid #ddd",
-                borderRadius: "5px",
-                boxSizing: "border-box",
-              }}
+              style={inputStyle}
             />
-          </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "5px",
-                fontWeight: "bold",
-              }}
-            >
-              Phone:
-            </label>
+            {/* PHONE */}
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
+              placeholder="Phone Number"
               required
-              style={{
-                width: "100%",
-                padding: "10px",
-                fontSize: "1rem",
-                border: "2px solid #ddd",
-                borderRadius: "5px",
-                boxSizing: "border-box",
-              }}
+              style={inputStyle}
             />
-          </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "5px",
-                fontWeight: "bold",
-              }}
-            >
-              Message:
-            </label>
+            {/* MESSAGE */}
             <textarea
               name="message"
               value={formData.message}
               onChange={handleChange}
+              placeholder="Your Message"
               required
-              rows="4"
+              rows="3"
+              style={{ ...inputStyle, borderRadius: "12px", resize: "none" }}
+            />
+
+            <button
+              type="submit"
               style={{
                 width: "100%",
-                padding: "10px",
-                fontSize: "1rem",
-                border: "2px solid #ddd",
-                borderRadius: "5px",
-                boxSizing: "border-box",
-                resize: "vertical",
+                padding: "12px",
+                marginTop: "10px",
+                backgroundColor: "#1976d2",
+                color: "white",
+                border: "none",
+                borderRadius: "20px",
+                fontSize: "0.95rem",
+                cursor: "pointer",
               }}
-            />
-          </div>
+            >
+              Submit
+            </button>
+          </form>
 
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "12px",
-              fontSize: "1.1rem",
-              cursor: "pointer",
-              backgroundColor: "#4CAF50",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              fontWeight: "bold",
-            }}
-          >
-            Submit
-          </button>
-        </form>
-
-        {submittedData && (
-          <div
-            style={{
-              marginTop: "30px",
-              padding: "20px",
-              backgroundColor: "#e8f5e9",
-              borderRadius: "5px",
-              border: "2px solid #4CAF50",
-            }}
-          >
-            <h2 style={{ marginBottom: "15px", color: "#2e7d32" }}>
-              Submitted Data:
-            </h2>
-            <p style={{ marginBottom: "8px" }}>
-              <strong>Name:</strong> {submittedData.name}
-            </p>
-            <p style={{ marginBottom: "8px" }}>
-              <strong>Email:</strong> {submittedData.email}
-            </p>
-            <p style={{ marginBottom: "8px" }}>
-              <strong>Phone:</strong> {submittedData.phone}
-            </p>
-            <p style={{ marginBottom: "8px" }}>
-              <strong>Message:</strong> {submittedData.message}
-            </p>
-          </div>
-        )}
+          {submittedData && (
+            <div
+              style={{
+                marginTop: "20px",
+                padding: "15px",
+                backgroundColor: "#e3f2fd",
+                borderRadius: "8px",
+                border: "1px solid #90caf9",
+                fontSize: "0.9rem",
+                color: "#333",
+              }}
+            >
+              <strong>Submitted Details</strong>
+              <p>Name: {submittedData.name}</p>
+              <p>Email: {submittedData.email}</p>
+              <p>Phone: {submittedData.phone}</p>
+              <p>Message: {submittedData.message}</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
+
+const inputStyle = {
+  width: "100%",
+  padding: "10px 14px",
+  marginBottom: "12px",
+  borderRadius: "20px",
+  border: "1px solid #90caf9",
+  fontSize: "0.9rem",
+  outline: "none",
+  boxSizing: "border-box",
+};
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

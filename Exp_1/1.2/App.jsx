@@ -7,7 +7,10 @@ function TodoList() {
 
   const addTask = () => {
     if (inputValue.trim() !== "") {
-      setTasks([...tasks, { id: Date.now(), text: inputValue }]);
+      setTasks([
+        ...tasks,
+        { id: Date.now(), text: inputValue, completed: false },
+      ]);
       setInputValue("");
     }
   };
@@ -16,103 +19,160 @@ function TodoList() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  const toggleComplete = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  const completedCount = tasks.filter((t) => t.completed).length;
+
   return (
     <div
       style={{
+        height: "100vh",
+        background: "linear-gradient(135deg, #e3f2fd, #f5f5f5)",
         display: "flex",
-        flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
-        padding: "50px",
         fontFamily: "Arial, sans-serif",
-        maxWidth: "600px",
-        margin: "0 auto",
       }}
     >
-      <h1>Simple To-Do List SPA</h1>
-
       <div
         style={{
-          display: "flex",
-          gap: "10px",
-          marginBottom: "20px",
-          width: "100%",
+          backgroundColor: "#ffffff",
+          padding: "25px",
+          borderRadius: "12px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          width: "420px",
         }}
       >
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && addTask()}
-          placeholder="Enter a task..."
+        {/* INNER BORDER */}
+        <div
           style={{
-            flex: 1,
-            padding: "10px",
-            fontSize: "1rem",
-            border: "2px solid #ddd",
-            borderRadius: "5px",
-          }}
-        />
-        <button
-          onClick={addTask}
-          style={{
-            padding: "10px 20px",
-            fontSize: "1rem",
-            cursor: "pointer",
-            backgroundColor: "#4CAF50",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
+            border: "2px solid #90caf9",
+            borderRadius: "10px",
+            padding: "20px",
           }}
         >
-          Add Task
-        </button>
-      </div>
-
-      <ul
-        style={{
-          listStyle: "none",
-          padding: 0,
-          width: "100%",
-        }}
-      >
-        {tasks.map((task) => (
-          <li
-            key={task.id}
+          <h2
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "15px",
-              marginBottom: "10px",
-              backgroundColor: "#f9f9f9",
-              borderRadius: "5px",
-              border: "1px solid #ddd",
+              textAlign: "center",
+              marginBottom: "8px",
+              color: "#1976d2",
             }}
           >
-            <span style={{ fontSize: "1.1rem" }}>{task.text}</span>
-            <button
-              onClick={() => deleteTask(task.id)}
+            To-Do List
+          </h2>
+
+          <p
+            style={{
+              textAlign: "center",
+              color: "#666",
+              marginBottom: "15px",
+              fontSize: "0.9rem",
+            }}
+          >
+            Total: {tasks.length} | Completed: {completedCount}
+          </p>
+
+          {/* INPUT ROW */}
+          <div style={{ display: "flex", gap: "10px", marginBottom: "15px" }}>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && addTask()}
+              placeholder="Enter a task..."
               style={{
-                padding: "5px 15px",
-                fontSize: "0.9rem",
-                cursor: "pointer",
-                backgroundColor: "#f44336",
+                flex: 1,
+                padding: "10px 14px",
+                fontSize: "0.95rem",
+                border: "1px solid #90caf9",
+                borderRadius: "20px",
+                outline: "none",
+              }}
+            />
+            <button
+              onClick={addTask}
+              style={{
+                padding: "10px 18px",
+                backgroundColor: "#1976d2",
                 color: "white",
                 border: "none",
-                borderRadius: "5px",
+                borderRadius: "20px",
+                cursor: "pointer",
+                fontSize: "0.9rem",
               }}
             >
-              Delete
+              Add
             </button>
-          </li>
-        ))}
-      </ul>
+          </div>
 
-      {tasks.length === 0 && (
-        <p style={{ color: "#999", marginTop: "20px" }}>
-          No tasks yet. Add one above!
-        </p>
-      )}
+          {/* TASK LIST */}
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {tasks.map((task) => (
+              <li
+                key={task.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "10px 12px",
+                  marginBottom: "8px",
+                  backgroundColor: "#f5f5f5",
+                  border: "1px solid #ddd",
+                  borderRadius: "8px",
+                }}
+              >
+                <span
+                  onClick={() => toggleComplete(task.id)}
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: task.completed ? "line-through" : "none",
+                    color: task.completed ? "#888" : "#333",
+                    flex: 1,
+                    fontSize: "0.95rem",
+                  }}
+                >
+                  {task.text}
+                </span>
+
+                <button
+                  onClick={() => deleteTask(task.id)}
+                  style={{
+                    marginLeft: "10px",
+                    padding: "6px 12px",
+                    backgroundColor: "#f44336",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "15px",
+                    cursor: "pointer",
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          {tasks.length === 0 && (
+            <p
+              style={{
+                textAlign: "center",
+                color: "#999",
+                marginTop: "15px",
+                fontSize: "0.9rem",
+              }}
+            >
+              No tasks yet. Add one above!
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

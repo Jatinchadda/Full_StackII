@@ -9,112 +9,78 @@ function ThemeToggle() {
   };
 
   const lightTheme = {
-    backgroundColor: "#ffffff",
-    color: "#000000",
-    buttonBg: "#4CAF50",
-    buttonHoverBg: "#45a049",
-    cardBg: "#f9f9f9",
-    border: "#ddd",
+    background: "linear-gradient(135deg, #e3f2fd, #f5f5f5)",
+    cardBg: "#ffffff",
+    text: "#000000",
+    border: "#90caf9",
+    button: "#1976d2",
   };
 
   const darkTheme = {
-    backgroundColor: "#1a1a1a",
-    color: "#ffffff",
-    buttonBg: "#2196F3",
-    buttonHoverBg: "#0b7dda",
+    background: "#1e1e1e",
     cardBg: "#2d2d2d",
+    text: "#ffffff",
     border: "#444",
+    button: "#2196F3",
   };
 
-  const currentTheme = theme === "light" ? lightTheme : darkTheme;
+  const current = theme === "light" ? lightTheme : darkTheme;
 
   return (
     <div
       style={{
-        minHeight: "100vh",
-        backgroundColor: currentTheme.backgroundColor,
-        color: currentTheme.color,
-        transition: "all 0.3s ease",
+        height: "100vh",
+        background: current.background,
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
         justifyContent: "center",
+        alignItems: "center",
         fontFamily: "Arial, sans-serif",
-        padding: "20px",
+        transition: "0.3s",
       }}
     >
-      <h1 style={{ marginBottom: "20px" }}>Theme Toggle SPA</h1>
-
       <div
         style={{
-          backgroundColor: currentTheme.cardBg,
-          padding: "40px",
-          borderRadius: "10px",
-          border: `2px solid ${currentTheme.border}`,
-          textAlign: "center",
-          maxWidth: "500px",
-          transition: "all 0.3s ease",
+          backgroundColor: current.cardBg,
+          padding: "25px",
+          borderRadius: "12px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          width: "360px",
         }}
       >
-        <h2 style={{ marginBottom: "20px" }}>
-          Current Theme: {theme === "light" ? "Light" : "Dark"}
-        </h2>
-
-        <p style={{ marginBottom: "30px", fontSize: "1.1rem" }}>
-          Click the button below to switch between light and dark mode
-        </p>
-
-        <button
-          onClick={toggleTheme}
+        {/* INNER BORDER */}
+        <div
           style={{
-            padding: "15px 30px",
-            fontSize: "1.2rem",
-            cursor: "pointer",
-            backgroundColor: currentTheme.buttonBg,
-            color: "#ffffff",
-            border: "none",
-            borderRadius: "5px",
-            transition: "all 0.3s ease",
+            border: `2px solid ${current.border}`,
+            borderRadius: "10px",
+            padding: "20px",
+            textAlign: "center",
+            color: current.text,
+            transition: "0.3s",
           }}
-          onMouseOver={(e) =>
-            (e.target.style.backgroundColor = currentTheme.buttonHoverBg)
-          }
-          onMouseOut={(e) =>
-            (e.target.style.backgroundColor = currentTheme.buttonBg)
-          }
         >
-          Toggle Theme
-        </button>
-      </div>
+          <h2 style={{ marginBottom: "10px", color: "#1976d2" }}>
+            Theme Toggle
+          </h2>
 
-      <div
-        style={{
-          marginTop: "40px",
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "20px",
-        }}
-      >
-        {[1, 2, 3].map((num) => (
-          <div
-            key={num}
+          <p style={{ marginBottom: "20px", color: "#666", fontSize: "0.95rem" }}>
+            Current Mode: <strong>{theme === "light" ? "Light" : "Dark"}</strong>
+          </p>
+
+          <button
+            onClick={toggleTheme}
             style={{
-              width: "120px",
-              height: "120px",
-              backgroundColor: currentTheme.cardBg,
-              border: `2px solid ${currentTheme.border}`,
-              borderRadius: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "2rem",
-              fontWeight: "bold",
-              transition: "all 0.3s ease",
+              padding: "12px 30px",
+              backgroundColor: current.button,
+              color: "white",
+              border: "none",
+              borderRadius: "20px",
+              cursor: "pointer",
+              fontSize: "0.95rem",
             }}
           >
-            {num}
-          </div>
-        ))}
+            Switch to {theme === "light" ? "Dark" : "Light"} Mode
+          </button>
+        </div>
       </div>
     </div>
   );
