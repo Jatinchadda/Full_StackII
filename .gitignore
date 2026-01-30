@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -13,11 +14,57 @@
 
 # misc
 .DS_Store
+=======
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+*.local
+
+# Environment variables
+.env
+>>>>>>> a9b0d3f6e4b13ca167c19d39df60cf53d9a8c9b2
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+<<<<<<< HEAD
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+=======
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.parcel-cache/
+.vite/
+
+# Temporary files
+*.tmp
+.temp/
+>>>>>>> a9b0d3f6e4b13ca167c19d39df60cf53d9a8c9b2
