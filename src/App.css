@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+:root{
+  --brand: #1976d2;
+  --accent: #f50057;
+}
+
+body{
+  background: #f6f8fb;
+}
+
+.container{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+h3, h4, h5 {
+  color: #0f1720;
+}
